@@ -1,0 +1,336 @@
+
+% ==============================================================================
+\chapter{Document layout}
+% ==============================================================================
+
+\begin{frontmatter}
+
+\begin{abstract}
+This chapter describes the document layout, including the compilation instructions.
+\end{abstract}
+
+\keywords{\LaTeX; class; article}
+
+\begin{remark}
+  T.W.J. de Geus
+\end{remark}
+
+\end{frontmatter}
+
+% ==============================================================================
+\section{Preamble}
+% ==============================================================================
+
+% ==============================================================================
+\subsection{Introduction}
+% ==============================================================================
+
+By default most of the standard \LaTeX-packages are loaded. Any of these packages can be re-loaded, with other defaults, without problems. In addition the title and author can be specified; see below.
+
+% ==============================================================================
+\subsection{Load class}
+% ==============================================================================
+
+To load the class use
+\begin{verbatim}
+  \documentclass{goose-thesis}
+\end{verbatim}
+%
+To use customized fonts, the documents has to be compiled using XeLaTeX. For example:
+\begin{verbatim}
+  %!TEX program = XeLaTeX
+  \documentclass[garamond]{goose-thesis}
+\end{verbatim}
+%
+The following fonts are available:
+%
+\begin{itemize}
+  %
+  \item \texttt{garamond}
+  \item \texttt{times}
+  \item \texttt{verdana}
+  %
+\end{itemize}
+%
+%
+Furthermore the following options are available
+%
+\begin{itemize}
+  %
+  \item \texttt{narrow}: widen the margins of the page, useful during the review process;
+  \item \texttt{doublespacing}: set the line-spacing to double, useful during the review process.
+  \item \texttt{namecite}: use names instead of number of citations.
+  \item \texttt{sectionbib}: include the bibliography at the end of each chapter.
+  %
+\end{itemize}
+%
+
+% ==============================================================================
+\subsection{Title and author}
+% ==============================================================================
+
+%
+\begin{itemize}
+%
+\item The \textit{title} is specified using
+\begin{verbatim}
+  \title{...}
+\end{verbatim}
+%
+\item The \textit{author} is specified using
+\begin{verbatim}
+  \author{...}
+\end{verbatim}
+%
+\item Additionally one could decide to change the author of the PDF-document
+\begin{verbatim}
+  \hypersetup{pdfauthor={...}}
+\end{verbatim}
+%
+\end{itemize}
+%
+
+% ==============================================================================
+\section{Main text}
+% ==============================================================================
+
+In the simplest form the thesis will have one bibliography at the end of the documents. It also possible to include a bibliography at the end of each chapter, see Section~\ref{sec:sectionbib}.
+
+% ==============================================================================
+\subsection{Structure}
+% ==============================================================================
+
+The thesis comprises of a main \TeX-files and \TeX-files for each chapter. Furthermore a \texttt{Makefile} can be used to gather the compilation instructions. The suggested structure is as follows
+%
+\begin{verbatim}
+  main.tex
+  example_chapter1.tex
+  example_chapter2.tex
+  ...
+  library.bib
+  figures/
+\end{verbatim}
+%
+
+% ==============================================================================
+\subsection{Main document}
+% ==============================================================================
+
+The layout is as follows
+\begin{mdframed}
+\begin{verbatim}
+\documentclass[options]{goose-thesis}
+
+\title{...}
+
+\author{...}
+
+...
+
+\begin{document}
+
+  \maketitle
+
+  \setcounter{tocdepth}{0}
+  \tableofcontents
+
+  \cleardoublepage
+  \include{example_chapter1}
+
+  \cleardoublepage
+  \include{example_chapter2}
+
+  ...
+
+  \bibliography{...}
+
+\end{document}
+\end{verbatim}
+\end{mdframed}
+
+Herein the chapters have been included as separate files. Notice that there is a single \verb|\bibliography{...}| entry at the end of the main document. None of the chapters (in the \verb|\include{...}| command) will have such an entry.
+
+% ==============================================================================
+\subsection{Chapters}
+% ==============================================================================
+
+The layout is as follows
+\begin{mdframed}
+\begin{verbatim}
+\begin{chapter}
+
+\begin{frontmatter}
+
+\begin{abstract}
+...
+\end{abstract}
+
+\keywords{...}
+
+\begin{remark}
+...
+\end{remark}
+
+\end{frontmatter}
+
+...
+
+
+
+\appendix
+
+...
+
+\end{verbatim}
+\end{mdframed}
+
+Notice how each of the chapters has its own appendix.
+
+% ==============================================================================
+\subsection{Compilation}
+% ==============================================================================
+
+The compilation can be done by compiling the main-file just like any other file.
+
+% ==============================================================================
+\section{Main text -- multiple bibliographies}
+\label{sec:sectionbib}
+% ==============================================================================
+
+% ==============================================================================
+\subsection{Structure}
+% ==============================================================================
+
+The thesis comprises of a main \TeX-files and \TeX-files for each chapter. Furthermore a \texttt{Makefile} can be used to gather the compilation instructions. The suggested structure is as follows
+%
+\begin{verbatim}
+  main.tex
+  example_chapter1.tex
+  example_chapter2.tex
+  ...
+  library.bib
+  figures/
+\end{verbatim}
+%
+
+% ==============================================================================
+\subsection{Main document}
+% ==============================================================================
+
+The layout is as follows
+\begin{mdframed}
+\begin{verbatim}
+\documentclass[sectionbib,...]{goose-thesis}
+
+\title{...}
+
+\author{...}
+
+...
+
+\begin{document}
+
+  \maketitle
+
+  \setcounter{tocdepth}{0}
+  \tableofcontents
+
+  \cleardoublepage
+  \include{example_chapter1}
+
+  \cleardoublepage
+  \include{example_chapter2}
+
+  ...
+
+\end{document}
+\end{verbatim}
+\end{mdframed}
+
+Notice that in this case the main file does not have a \verb|\bibliography{...}| command. Rather, each of the chapter contains this command (unless of course that are no citations in that chapter). Also notice that the \verb|sectionbib| option has been used.
+
+% ==============================================================================
+\subsection{Chapters}
+% ==============================================================================
+
+The layout is as follows
+\begin{mdframed}
+\begin{verbatim}
+\begin{chapter}
+
+\begin{frontmatter}
+
+\begin{abstract}
+...
+\end{abstract}
+
+\keywords{...}
+
+\begin{remark}
+...
+\end{remark}
+
+\end{frontmatter}
+
+...
+
+\bibliography{...}
+
+\appendix
+
+...
+
+\end{verbatim}
+\end{mdframed}
+
+Notice the \verb|\bibliography{...}| command at the end of the chapter.
+
+% ==============================================================================
+\subsection{Compilation}
+% ==============================================================================
+
+In this case the compilation is a bit more involved, as several bibliographies have to be created. For this example the steps are included in the following \texttt{Makefile}:
+
+\begin{mdframed}
+\begin{verbatim}
+all:
+  xelatex -interaction=nonstopmode example.tex
+  xelatex -interaction=nonstopmode example.tex
+  bibtex example_chapter1
+  bibtex example_chapter2
+  xelatex -interaction=nonstopmode example.tex
+  xelatex -interaction=nonstopmode example.tex
+
+clean:
+  rm *.aux *.bbl *.log *.out *.pdf *.toc *.blg *.fls *.fdb_latexmk
+\end{verbatim}
+\end{mdframed}
+
+% ==============================================================================
+\section{Citations}
+% ==============================================================================
+
+Citations and references are handled using \texttt{natbib}. To cite use
+\begin{verbatim}
+  \citep{...}  (or \cite{...})
+  \citet{...}
+\end{verbatim}
+The former only inserted a citation as number. For example \citep{geus}. The latter also includes the name(s) of the author(s). For example \citet{geus,wiki}.
+
+The bibliography information is stored in a \texttt{bib}-file, which is included using
+\begin{verbatim}
+  \bibliography{...}
+\end{verbatim}
+This command creates a chapter section ``References'' with the bibliography. By default number citations are used, in which the references appear in the order in which they were cited. In the case that the \verb|namecite| option is used, the citations appear in names in alphabetical order.
+
+Note that a large part of the formatting of Bib\TeX~depends on the formatting of the \texttt{bib}-file. A Python-script \texttt{bibparse} is available to automatically clean-up the formatting of the \texttt{bib}-file. An updated \texttt{unsrtnat.bst} is available that includes the \texttt{eprint} field.
+
+% ==============================================================================
+\bibliography{example_refs}
+% ==============================================================================
+
+\appendix
+
+% ==============================================================================
+\section{Some appendix}
+% ==============================================================================
