@@ -70,6 +70,10 @@ By default most of the standard LaTeX-packages are loaded. Any of these packages
 
     Use names instead of numbers to cite to references.
 
+*   `eqreflocal`
+
+    Number the equations without a chapter number, but still starting from one in each chapter.
+
 *   `sectionbib`
 
     Include the bibliography at the end of each chapter. If this option is used, the `\bibliography{...}` command should be removed from the main TeX-file. Instead, each of the chapters should include this command at the end of the chapter. Compiling in this case warrants some attention. First compile the main TeX-file using `pdflatex` or `xelatex` (depending on the selected font). Then run `bibtex` on each of the chapters. Finally recompile the main TeX-file. This corresponds to the following series of commands:

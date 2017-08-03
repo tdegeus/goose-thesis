@@ -63,6 +63,13 @@
 \let\if@verdana\iffalse
 \DeclareOption{verdana}{\let\if@verdana\iftrue\let\if@font\iftrue}
 
+% Numbering
+% ---------
+
+\newif\if@eqreflocal
+\let\if@eqreflocal\iffalse
+\DeclareOption{eqreflocal}{\let\if@eqreflocal\iftrue}
+
 % Process options
 % ---------------
 
@@ -262,7 +269,9 @@
 % equations: per chapter (without chapter number)
 % -----------------------------------------------
 
-\renewcommand\theequation{\arabic{equation}}
+\if@eqreflocal
+  \renewcommand\theequation{\arabic{equation}}
+\fi
 
 % appendix: per chapter
 % ---------------------
