@@ -15,7 +15,7 @@ A customized book class for LaTeX.
 
 ## Usage
 
-`goose-thesis` is a customized class designed to compile a thesis from several chapters, which are usually stored as separate input-files. These chapters also have some requirements on the structure, see: *[Input files](#input-files)*. The main document (e.g. `main.tex`) has the following structure:
+`goose-thesis` is a customized class designed to compile a thesis from several chapters, which are usually stored as separate input files. These chapters also have some requirements on the structure, see: *[Input files](#input-files)*. The main document (e.g. `main.tex`) has the following structure:
 
 ```latex
 %!TEX program = xelatex
@@ -26,9 +26,9 @@ A customized book class for LaTeX.
 \author{...}
 \hypersetup{pdfauthor={...}}
 
-% %%%%%%%%%%%%%%
+% -------------------------------
+
 \begin{document}
-% %%%%%%%%%%%%%%
 
 \maketitle
 
@@ -43,14 +43,12 @@ A customized book class for LaTeX.
 
 \bibliography{...}
 
-% %%%%%%%%%%%%
 \end{document}
-% %%%%%%%%%%%%
 ```
 
-By default most of the standard LaTeX-packages are loaded. Any of these packages can be re-loaded, with other defaults, without problems. In addition, the title and the author should be specified.
+By default most of the standard LaTeX packages are loaded. Any of these packages can be reloaded, with other defaults, without problems. In addition, the title and the author should be specified.
 
->   Note that the first line `%!TEX program = xelatex` is only needed if a non-LaTeX-standard font is selected. In fact, only when an editor is used which supports compiler selection this way. For those unfamiliar, XeLaTeX is similar to `pdflatex` but is allows for the usage of TrueType-fonts.
+>   Note that the first line `%!TEX program = xelatex` is only needed if a non-LaTeX-standard font is selected. In fact, only when an editor is used which supports compiler selection this way. For those unfamiliar, XeLaTeX is similar to `pdflatex` but it allows for the usage of TrueType-fonts.
 
 ## Options
 
@@ -64,7 +62,7 @@ By default most of the standard LaTeX-packages are loaded. Any of these packages
 
 *   `doublespacing`
 
-    Set the line-spacing to double, useful during the review process.
+    Set the line spacing to double, useful during the review process.
 
 *   `namecite`
 
@@ -87,11 +85,11 @@ By default most of the standard LaTeX-packages are loaded. Any of these packages
     xelatex -interaction=nonstopmode main.tex
     ```
 
-    (see also the [Makefile](https://github.com/tdegeus/GooseLaTeX/blob/master/goose-thesis/Makefile) of the example).
+    (See also the [Makefile](https://github.com/tdegeus/GooseLaTeX/blob/master/goose-thesis/Makefile) of the example.)
 
 ## Input files
 
-Each of these input-files follow the same structure (e.g. `chapterX.tex`). It begins with the title of the chapter: `\chapter{...}`. The chapter name and its number are printed on the front-page on this chapter. In addition, a number of fields can be included on the front-page between between `\begin{frontmatter} ... \end{frontmatter}`. 
+Each of these input files follow the same structure (e.g. `chapterX.tex`). It begins with the title of the chapter: `\chapter{...}`. The chapter name and its number are printed on the front page on this chapter. In addition, a number of fields can be included on the front page between `\begin{frontmatter} ... \end{frontmatter}`. 
 
 ```latex
 % Title of the chapter (shown of title page)
@@ -122,7 +120,7 @@ Each of these input-files follow the same structure (e.g. `chapterX.tex`). It be
 ...
 ```
 
-The following fields can be included on the front-page between between `\begin{frontmatter} ... \end{frontmatter}`:
+The following fields can be included on the front page between `\begin{frontmatter} ... \end{frontmatter}`:
 
 *   `\begin{abstract} ... \end{abstract}`
 
@@ -140,6 +138,6 @@ The following fields can be included on the front-page between between `\begin{f
 
 Citations and references are handled using [natbib](http://ctan.org/pkg/natbib). In this class, the `unsrtnat` layout is used. Thereby, the extended `unsrtnat.bst` is available that includes output for the `eprint` field. The `goose-article` class creates commands to convert the `doi` and `eprint` fields to links (to `doi.org` and `arxiv.org` respectively).
 
-Following standard natbib, one can use `\cite{...}` or `\citep{...}` for normal citations and `\citet{...}` to include the name. [See also this cheat-sheet](http://merkel.texture.rocks/Latex/natbib.php).
+Following standard natbib, one can use `\cite{...}` or `\citep{...}` for normal citations and `\citet{...}` to include the name. [See also this cheat sheet](http://merkel.texture.rocks/Latex/natbib.php).
 
-Note that the outputted reference-list depends largely on the content of the included `bib`-file. A simple command-line tool, [bibparse](https://github.com/tdegeus/bibparse), is available to clean-up arbitrary `bib`-files.
+Note that the outputted reference list depends largely on the content of the included `bib`-file. A simple command-line tool, [bibparse](https://github.com/tdegeus/bibparse), is available to clean up arbitrary `bib`-files.
