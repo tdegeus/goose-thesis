@@ -18,7 +18,6 @@ A customized book class for LaTeX.
 `goose-thesis` is a customized class designed to compile a thesis from several chapters, which are usually stored as separate input files. These chapters also have some requirements on the structure, see: *[Input files](#input-files)*. The main document (e.g. `main.tex`) has the following structure:
 
 ```latex
-%!TEX program = xelatex
 \documentclass[...]{goose-thesis}
 
 % The title and author.
@@ -48,13 +47,11 @@ A customized book class for LaTeX.
 
 By default most of the standard LaTeX packages are loaded. Any of these packages can be reloaded, with other defaults, without problems. In addition, the title and the author should be specified.
 
->   Note that the first line `%!TEX program = xelatex` is only needed if a non-LaTeX-standard font is selected. In fact, only when an editor is used which supports compiler selection this way. For those unfamiliar, XeLaTeX is similar to `pdflatex` but it allows for the usage of TrueType-fonts.
-
 ## Options
 
 *   `garamond`, `times`, `verdana`
 
-    Choose a font. The default computer-modern font is used if no font is specified.
+    Choose a font. The default computer-modern font is used if no font is specified. If you select one of these fonts, switch in compilation from using `pdflatex` to `xelatex`. XeLaTeX is similar to `pdflatex` but it allows for the usage of TrueType-fonts.
 
 *   `narrow`
 
@@ -77,12 +74,12 @@ By default most of the standard LaTeX packages are loaded. Any of these packages
     Include the bibliography at the end of each chapter. If this option is used, the `\bibliography{...}` command should be removed from the main TeX-file. Instead, each of the chapters should include this command at the end of the chapter. Compiling in this case warrants some attention. First compile the main TeX-file using `pdflatex` or `xelatex` (depending on the selected font). Then run `bibtex` on each of the chapters. Finally recompile the main TeX-file. This corresponds to the following series of commands:
 
     ```bash 
-    xelatex -interaction=nonstopmode main.tex
-    xelatex -interaction=nonstopmode main.tex
+    pdflatex -interaction=nonstopmode main.tex
+    pdflatex -interaction=nonstopmode main.tex
     bibtex chapterX
     bibtex chapterY
-    xelatex -interaction=nonstopmode main.tex
-    xelatex -interaction=nonstopmode main.tex
+    pdflatex -interaction=nonstopmode main.tex
+    pdflatex -interaction=nonstopmode main.tex
     ```
 
     (See also the [Makefile](https://github.com/tdegeus/GooseLaTeX/blob/master/goose-thesis/Makefile) of the example.)
