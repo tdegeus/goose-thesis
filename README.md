@@ -22,17 +22,23 @@ A customised book class for LaTeX.
 
 ## Usage
 
-`goose-thesis` is a customised class designed to compile a thesis from several chapters, which are usually stored as separate input files. These chapters also have some requirements on the structure, see: *[Input files](#input-files)*. The main document (e.g. `main.tex`) has the following structure:
+`goose-thesis` is a customised class designed to compile a thesis from several chapters, which are usually stored as separate input files. These chapters also have some requirements on the structure, see: *[Input files](#input-files)*. To get started, copy the files from [src/](src/) to to main directory of your project (always copy [goose-article.cls](src/goose-article.cls) and copy to your need [unsrtnat.bst](src/unsrtnat.bst) or [apalike.bst](src/apalike.bst)). 
+
+By default most of the standard LaTeX packages are loaded. Any of these packages can be reloaded without problems (possibly using other options). In addition, the title and the author should be specified.
+
+Consequently, the main document (e.g. `main.tex`) has the following structure:
 
 ```latex
 \documentclass[...]{goose-thesis}
 
-% The title and author.
+% The title (also used as PDF-title) and author.
 \title{...}
 \author{...}
+
+% The author to put in the PDF information.
 \hypersetup{pdfauthor={...}}
 
-% -------------------------------
+% =============================
 
 \begin{document}
 
@@ -51,8 +57,6 @@ A customised book class for LaTeX.
 
 \end{document}
 ```
-
-By default most of the standard LaTeX packages are loaded. Any of these packages can be reloaded, with other defaults, without problems. In addition, the title and the author should be specified.
 
 ## Options
 
@@ -135,7 +139,7 @@ The following fields can be included on the front page between `\begin{frontmatt
 
 Citations and references are handled using [natbib](http://ctan.org/pkg/natbib). In this class, the `unsrtnat` layout is used. Thereby, the extended `unsrtnat.bst` is available that includes output for the `arxivid` field. The `goose-article` class creates commands to convert the `doi` and `arxivid` fields to links (to `doi.org` and `arxiv.org` respectively). Similarly a customised `apalike` style is available.
 
-Following standard natbib, one can use `\cite{...}` or `\citep{...}` for normal citations and `\citet{...}` to include the name. [See also this cheat sheet](http://merkel.texture.rocks/Latex/natbib.php).
+Following standard natbib, one can use `\cite{...}` or `\citep{...}` for normal citations and `\citet{...}` to include the name. [See also this cheat-sheet](http://merkel.texture.rocks/Latex/natbib.php).
 
 Note that the outputted reference list depends largely on the content of the included `bib`-file. A simple command-line tool, [GooseBib](https://github.com/tdegeus/GooseBib), is available to clean up arbitrary `bib`-files.
 
