@@ -1,11 +1,11 @@
 % ------------------------------------------------------------------------------
 %  @LaTeX-class-file{
 %     filename        = "goose-thesis.cls",
-%     version         = "0.3",
-%     date            = "16 November 2016",
+%     version         = "0.4.0",
+%     date            = "February 2019",
 %     codetable       = "ISO/ASCII",
 %     keywords        = "LaTeX, goose-thesis",
-%     supported       = "http://tdegeus.github.io/GooseLaTeX",
+%     supported       = "https://github.com/tdegeus/goose-thesis",
 %     docstring       = "A customized book-class."
 % ------------------------------------------------------------------------------
 
@@ -44,6 +44,20 @@
 \newif\if@doublespacing
 \let\if@doublespacing\iffalse
 \DeclareOption{doublespacing}{\let\if@doublespacing\iftrue}
+
+% No header: [empty]
+% ------------------
+
+\newif\if@empty
+\let\if@empty\iffalse
+\DeclareOption{empty}{\let\if@empty\iftrue}
+
+% Single-column bibliography [twocolumnbib]
+% -----------------------------------------
+
+\newif\if@twocolumnbib
+\let\if@twocolumnbib\iffalse
+\DeclareOption{twocolumnbib}{\let\if@twocolumnbib\iftrue}
 
 % Font: [times,garamond,verdana]
 % ------------------------------
@@ -84,11 +98,12 @@
   \newgeometry{left=40mm,right=40mm,top=30mm,bottom=30mm}
 \fi
 
+\RequirePackage{fix-cm}
 \RequirePackage{graphicx}
-\RequirePackage{amssymb,amsfonts,bm,cancel}
-\RequirePackage{enumerate,enumitem}
+\RequirePackage[labelformat=simple]{subcaption}
+\RequirePackage{amssymb,amsfonts,bm}
+\RequirePackage{enumerate}
 \RequirePackage[fleqn]{amsmath}
-\RequirePackage{chapterbib}
 \RequirePackage[font={small},labelfont=bf,labelsep=period]{caption}
 \RequirePackage[bf]{titlesec}
 \RequirePackage[dvipsnames]{xcolor}
@@ -99,6 +114,10 @@
 % Citation style
 % ==============================================================================
 
+\if@sectionbib
+  \RequirePackage{chapterbib}
+\fi
+
 \if@namecite
   \RequirePackage{natbib}
   \let\oldbibliography\bibliography
@@ -107,7 +126,11 @@
     \setlength{\bibsep}{3pt plus 0.3ex}
     \def\bibfont{\scriptsize}
     \renewcommand{\bibname}{References}
-    \oldbibliography{#1}
+    \if@twocolumnbib
+    \begin{multicols}{2}\raggedright\oldbibliography{#1}\end{multicols}{#1}
+    \else
+    \raggedright\oldbibliography{#1}
+    \fi
   }
 \else
   \RequirePackage[square,sort&compress,numbers,comma]{natbib}
@@ -117,13 +140,17 @@
     \setlength{\bibsep}{3pt plus 0.3ex}
     \def\bibfont{\scriptsize}
     \renewcommand{\bibname}{References}
-    \oldbibliography{#1}
+    \if@twocolumnbib
+    \begin{multicols}{2}\raggedright\oldbibliography{#1}\end{multicols}{#1}
+    \else
+    \raggedright\oldbibliography{#1}
+    \fi
   }
 \fi
 
 % define DOI command
 \newcommand*{\doi}[1]{\sloppy\href{http://dx.doi.org/#1}{doi:~#1}}
-\newcommand*{\eprint}[1]{\sloppy\href{http://arxiv.org/abs/#1}{arXiv:~#1}}
+\newcommand*{\arxivid}[1]{\sloppy\href{http://arxiv.org/abs/#1}{arXiv:~#1}}
 
 % change to section instead of chapter
 \if@namecite
@@ -242,7 +269,8 @@
   {\normalfont\normalsize\bfseries}
   {}
   {}
-  {\vspace*{-0.6em}}
+  {}
+  {}
 
 % spacing {left}{top}{bottom}, of:
 % - section
@@ -251,6 +279,9 @@
 % - subsection
 \titlespacing{\subsection}
   {0pt}{0.8em}{0.4em}
+% - paragraph
+\titlespacing{\paragraph}
+  {0pt}{0.8em}{0em}
 
 % no paragraph indent after header
 \AtBeginDocument{%
@@ -266,15 +297,17 @@
 % Numbering
 % ==============================================================================
 
+% sub-figures
+
+\renewcommand\thesubfigure{(\alph{subfigure})}
+
 % equations: per chapter (without chapter number)
-% -----------------------------------------------
 
 \if@eqreflocal
   \renewcommand\theequation{\arabic{equation}}
 \fi
 
 % appendix: per chapter
-% ---------------------
 
 \pretocmd{\chapter}{\renewcommand\thesection{\thechapter.\arabic{section}}}{}{}
 
@@ -294,7 +327,6 @@
 
 \assignpagestyle{\chapter}{fancychapter}
 
-
 \pagestyle{fancy}
 \fancyhead{}
 \fancyfoot{}
@@ -304,11 +336,8 @@
 \newcommand{\header}[1]{\fancyhead[LO,RE]{\scriptsize\itshape#1}}
 
 % ==============================================================================
-% Abstract, keywords and reference information
+% Abstract and reference information
 % ==============================================================================
-
-
-\newcommand{\keywords}[1]{\vspace*{0.5eM}\noindent\textbf{Keywords: }#1}
 
 \newenvironment{abstract}{\section*{Abstract}\noindent\ignorespaces}{\ignorespacesafterend}
 
