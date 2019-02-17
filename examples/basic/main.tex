@@ -1,0 +1,40 @@
+\documentclass{goose-thesis}
+
+\usepackage{lipsum}
+
+\title{PhD-thesis}
+
+\author{Tom de Geus}
+
+% -------------------------------
+
+\begin{document}
+
+\maketitle
+
+\setcounter{tocdepth}{0}
+\tableofcontents
+
+\cleardoublepage
+\input{chapter_1}
+
+\cleardoublepage
+\input{chapter_2}
+
+\cleardoublepage
+
+% See:
+%  https://tex.stackexchange.com/a/3183/132350
+%  https://stackoverflow.com/a/4095276/2646505
+\setcounter{chapter}{0}
+\renewcommand\thechapter{\Alph{chapter}}
+\addcontentsline{toc}{chapter}{Appendix}
+
+% Another solution:
+%  https://tex.stackexchange.com/a/44971/132350
+
+\input{appendix_A}
+
+\bibliography{refs}
+
+\end{document}

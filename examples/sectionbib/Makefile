@@ -1,11 +1,11 @@
 
 all:
-	pdflatex -interaction=nonstopmode example.tex
-	pdflatex -interaction=nonstopmode example.tex
-	bibtex example_chapter1
-	bibtex example_chapter2
-	pdflatex -interaction=nonstopmode example.tex
-	pdflatex -interaction=nonstopmode example.tex
+	pdflatex -interaction=nonstopmode main.tex
+	pdflatex -interaction=nonstopmode main.tex
+	bibtex chapter_1
+	bibtex chapter_2
+	pdflatex -interaction=nonstopmode main.tex
+	pdflatex -interaction=nonstopmode main.tex
 
 clean:
 	rm *.aux *.bbl *.log *.out *.pdf *.toc *.blg *.fls *.fdb_latexmk
