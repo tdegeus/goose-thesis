@@ -27,8 +27,20 @@
 %  https://tex.stackexchange.com/a/3183/132350
 %  https://stackoverflow.com/a/4095276/2646505
 \setcounter{chapter}{0}
-\renewcommand\thechapter{\Alph{chapter}}
+
+\renewcommand\thechapter{\Roman{chapter}}
+
+\titleformat
+  {\chapter}
+  [display]
+  {\bfseries\Large}
+  {\hfill APPENDIX\ \thechapter}
+  {0.5ex}
+  {} % before-code
+  [\vspace{-0.5ex}\rule{\textwidth}{0.3pt}]
+
 \addcontentsline{toc}{chapter}{Appendix}
+
 
 % Another solution:
 %  https://tex.stackexchange.com/a/44971/132350
