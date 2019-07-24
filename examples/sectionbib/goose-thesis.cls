@@ -127,7 +127,7 @@
     \def\bibfont{\scriptsize}
     \renewcommand{\bibname}{References}
     \if@twocolumnbib
-    \begin{multicols}{2}\raggedright\oldbibliography{#1}\end{multicols}{#1}
+    \begin{multicols}{2}\raggedright\oldbibliography{#1}\end{multicols}
     \else
     \raggedright\oldbibliography{#1}
     \fi
@@ -141,7 +141,7 @@
     \def\bibfont{\scriptsize}
     \renewcommand{\bibname}{References}
     \if@twocolumnbib
-    \begin{multicols}{2}\raggedright\oldbibliography{#1}\end{multicols}{#1}
+    \begin{multicols}{2}\raggedright\oldbibliography{#1}\end{multicols}
     \else
     \raggedright\oldbibliography{#1}
     \fi
