@@ -12,7 +12,7 @@ repos:
   - id: check-yaml
   - id: debug-statements
 - repo: https://github.com/cmhughes/latexindent.pl
-  rev: v3.15
+  rev: V3.15
   hooks:
   - id: latexindent-conda
     args: [-s, -w, -l, -m, -r]
