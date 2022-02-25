@@ -1,0 +1,22 @@
+repos:
+- repo: https://github.com/macisamuele/language-formatters-pre-commit-hooks
+  rev: v2.2.0
+  hooks:
+  - id: pretty-format-yaml
+    args: [--autofix, --indent, '2']
+- repo: https://github.com/pre-commit/pre-commit-hooks
+  rev: v4.1.0
+  hooks:
+  - id: trailing-whitespace
+  - id: end-of-file-fixer
+  - id: check-yaml
+  - id: debug-statements
+- repo: https://github.com/cmhughes/latexindent.pl
+  rev: v3.15
+  hooks:
+  - id: latexindent-conda
+    args: [-s, -w, -l, -m, -r]
+- repo: https://github.com/tdegeus/GooseBib
+  rev: v0.4.0
+  hooks:
+  - id: GbibClean

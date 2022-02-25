@@ -95,7 +95,7 @@
 
 \RequirePackage[left=25mm,right=25mm,top=30mm,bottom=30mm]{geometry}
 \if@narrow
-  \newgeometry{left=40mm,right=40mm,top=30mm,bottom=30mm}
+    \newgeometry{left=40mm,right=40mm,top=30mm,bottom=30mm}
 \fi
 
 \RequirePackage{fix-cm}
@@ -115,37 +115,37 @@
 % ==============================================================================
 
 \if@sectionbib
-  \RequirePackage{chapterbib}
+    \RequirePackage{chapterbib}
 \fi
 
 \if@namecite
-  \RequirePackage{natbib}
-  \let\oldbibliography\bibliography
-  \renewcommand{\bibliography}[1]{%
-    \bibliographystyle{apalike}
-    \setlength{\bibsep}{3pt plus 0.3ex}
-    \def\bibfont{\scriptsize}
-    \renewcommand{\bibname}{References}
-    \if@twocolumnbib
-    \begin{multicols}{2}\raggedright\oldbibliography{#1}\end{multicols}
-    \else
-    \raggedright\oldbibliography{#1}
-    \fi
-  }
+    \RequirePackage{natbib}
+    \let\oldbibliography\bibliography
+    \renewcommand{\bibliography}[1]{%
+        \bibliographystyle{apalike}
+        \setlength{\bibsep}{3pt plus 0.3ex}
+        \def\bibfont{\scriptsize}
+        \renewcommand{\bibname}{References}
+        \if@twocolumnbib
+            \begin{multicols}{2}\raggedright\oldbibliography{#1}\end{multicols}
+        \else
+            \raggedright\oldbibliography{#1}
+        \fi
+    }
 \else
-  \RequirePackage[square,sort&compress,numbers,comma]{natbib}
-  \let\oldbibliography\bibliography
-  \renewcommand{\bibliography}[1]{%
-    \bibliographystyle{unsrtnat}
-    \setlength{\bibsep}{3pt plus 0.3ex}
-    \def\bibfont{\scriptsize}
-    \renewcommand{\bibname}{References}
-    \if@twocolumnbib
-    \begin{multicols}{2}\raggedright\oldbibliography{#1}\end{multicols}
-    \else
-    \raggedright\oldbibliography{#1}
-    \fi
-  }
+    \RequirePackage[square,sort&compress,numbers,comma]{natbib}
+    \let\oldbibliography\bibliography
+    \renewcommand{\bibliography}[1]{%
+        \bibliographystyle{unsrtnat}
+        \setlength{\bibsep}{3pt plus 0.3ex}
+        \def\bibfont{\scriptsize}
+        \renewcommand{\bibname}{References}
+        \if@twocolumnbib
+            \begin{multicols}{2}\raggedright\oldbibliography{#1}\end{multicols}
+        \else
+            \raggedright\oldbibliography{#1}
+        \fi
+    }
 \fi
 
 % define DOI command
@@ -154,13 +154,14 @@
 
 % change to section instead of chapter
 \if@namecite
-  \AtBeginDocument{%
-    \makeatletter
-    \renewcommand\bibsection{%
-      \section*{{\normalfont\large\bfseries\bibname}\@mkboth{\MakeUppercase{\bibname}}{\MakeUppercase{\bibname}}}%
-    }%
-    \makeatother
-  }
+    \AtBeginDocument{%
+        \makeatletter
+        \renewcommand\bibsection{%
+
+            \section*{{\normalfont\large\bfseries\bibname}\@mkboth{\MakeUppercase{\bibname}}{\MakeUppercase{\bibname}}}%
+        }%
+        \makeatother
+    }
 \fi
 
 % ==============================================================================
@@ -168,41 +169,41 @@
 % ==============================================================================
 
 \if@font
-  \RequirePackage{mathspec}
-  \RequirePackage{fontspec}
+    \RequirePackage{mathspec}
+    \RequirePackage{fontspec}
 \fi
 
 \if@garamond
-  \AtBeginDocument{%
-    \setmathfont(Digits)[Numbers=OldStyle]{Garamond}%
-    \setromanfont[%
-      BoldFont={Garamond Bold},%
-      ItalicFont={Garamond Italic},%
-      Mapping=tex-text%
-    ]{Garamond}%
-  }%
+    \AtBeginDocument{%
+        \setmathfont(Digits)[Numbers=OldStyle]{Garamond}%
+        \setromanfont[%
+            BoldFont={Garamond Bold},%
+            ItalicFont={Garamond Italic},%
+            Mapping=tex-text%
+        ]{Garamond}%
+    }%
 \fi
 
 \if@verdana
-  \AtBeginDocument{%
-    \defaultfontfeatures{Mapping=tex-text}
-    \setmainfont[Mapping=tex-text]{Verdana}
-    \setsansfont{Verdana}
-    \renewcommand*{\familydefault}{\sfdefault}
-    \setmathfont(Greek,Digits,Latin){Verdana}
-    \setmathrm{Verdana}
-  }%
+    \AtBeginDocument{%
+        \defaultfontfeatures{Mapping=tex-text}
+        \setmainfont[Mapping=tex-text]{Verdana}
+        \setsansfont{Verdana}
+        \renewcommand*{\familydefault}{\sfdefault}
+        \setmathfont(Greek,Digits,Latin){Verdana}
+        \setmathrm{Verdana}
+    }%
 \fi
 
 \if@times
-  \AtBeginDocument{%
-    \setmathfont(Digits)[Numbers=OldStyle]{Times New Roman}%
-    \setromanfont[%
-      BoldFont={Times New Roman Bold},%
-      ItalicFont={Times New Roman Italic},%
-      Mapping=tex-text%
-    ]{Times New Roman}%
-  }%
+    \AtBeginDocument{%
+        \setmathfont(Digits)[Numbers=OldStyle]{Times New Roman}%
+        \setromanfont[%
+            BoldFont={Times New Roman Bold},%
+            ItalicFont={Times New Roman Italic},%
+            Mapping=tex-text%
+        ]{Times New Roman}%
+    }%
 \fi
 
 % ==============================================================================
@@ -210,10 +211,10 @@
 % ==============================================================================
 
 \if@doublespacing
-  \AtBeginDocument{%
-    \usepackage{setspace}
-    \doublespacing
-  }%
+    \AtBeginDocument{%
+        \usepackage{setspace}
+        \doublespacing
+    }%
 \fi
 
 % ==============================================================================
@@ -221,16 +222,16 @@
 % ==============================================================================
 
 \AtBeginDocument{%
-  \hypersetup{%
-    pdftitle=\@title,
-    citecolor=Blue,
-    filecolor=black,
-    linkcolor=Blue,
-    urlcolor=Blue,
-    breaklinks,
-    hidelinks,
-    bookmarksopen=true,
-  }%
+    \hypersetup{%
+        pdftitle=\@title,
+        citecolor=Blue,
+        filecolor=black,
+        linkcolor=Blue,
+        urlcolor=Blue,
+        breaklinks,
+        hidelinks,
+        bookmarksopen=true,
+    }%
 }
 
 % ==============================================================================
@@ -240,57 +241,57 @@
 % {command}{format}{label}{sep}{before-code}{after-code}
 % - chapters
 \titleformat
-  {\chapter}
-  [display]
-  {\bfseries\Large}
-  {\hfill CHAPTER\ \thechapter}
-  {0.5ex}
-  {} % before-code
-  [\vspace{-0.5ex}\rule{\textwidth}{0.3pt}]
+{\chapter}
+[display]
+{\bfseries\Large}
+{\hfill CHAPTER\ \thechapter}
+{0.5ex}
+{} % before-code
+[\vspace{-0.5ex}\rule{\textwidth}{0.3pt}]
 % - section
 \titleformat
-  {\section}
-  {\normalfont\large\bfseries}
-  {\thesection}
-  {1em}
-  {}
-  {}
+{\section}
+{\normalfont\large\bfseries}
+{\thesection}
+{1em}
+{}
+{}
 % - subsection
 \titleformat
-  {\subsection}
-  {\normalfont\normalsize\bfseries}
-  {\thesubsection}
-  {1em}
-  {}
-  {}
+{\subsection}
+{\normalfont\normalsize\bfseries}
+{\thesubsection}
+{1em}
+{}
+{}
 % - paragraph
 \titleformat
-  {\paragraph}
-  {\normalfont\normalsize\bfseries}
-  {}
-  {}
-  {}
-  {}
+{\paragraph}
+{\normalfont\normalsize\bfseries}
+{}
+{}
+{}
+{}
 
 % spacing {left}{top}{bottom}, of:
 % - section
 \titlespacing{\section}
-  {0pt}{1eM}{0.8em}
+{0pt}{1eM}{0.8em}
 % - subsection
 \titlespacing{\subsection}
-  {0pt}{0.8em}{0.4em}
+{0pt}{0.8em}{0.4em}
 % - paragraph
 \titlespacing{\paragraph}
-  {0pt}{0.8em}{0em}
+{0pt}{0.8em}{0em}
 
 % no paragraph indent after header
 \AtBeginDocument{%
-  \makeatletter
-  \let\orig@afterheading\@afterheading
-  \def\@afterheading{%
-     \@afterindentfalse
-    \orig@afterheading}
-  \makeatother
+    \makeatletter
+    \let\orig@afterheading\@afterheading
+    \def\@afterheading{%
+        \@afterindentfalse
+        \orig@afterheading}
+    \makeatother
 }
 
 % ==============================================================================
@@ -304,16 +305,17 @@
 % equations: per chapter (without chapter number)
 
 \if@eqreflocal
-  \renewcommand\theequation{\arabic{equation}}
+    \renewcommand\theequation{\arabic{equation}}
 \fi
 
 % appendix: per chapter
 
-\pretocmd{\chapter}{\renewcommand\thesection{\thechapter.\arabic{section}}}{}{}
+\pretocmd{\chapter}{\renewcommand\thesection{\thechapter.
+        \arabic{section}}}{}{}
 
 \newcommand\appsection{%
-  \setcounter{section}{0}%
-  \renewcommand\thesection{\thechapter.\Alph{section}}}
+    \setcounter{section}{0}%
+    \renewcommand\thesection{\thechapter.\Alph{section}}}
 
 \renewcommand{\appendix}{\appsection}
 
@@ -344,5 +346,3 @@
 \newenvironment{remark}{\vfill\noindent\itshape\ignorespaces}{\normalfont\ignorespacesafterend}
 
 \renewenvironment{frontmatter}{\noindent\vfill\ignorespaces}{\normalfont\ignorespacesafterend\clearpage}
-
-
