@@ -1,0 +1,18 @@
+name: CI
+
+on:
+  workflow_dispatch:
+  pull_request:
+  push:
+    branches: [main]
+
+jobs:
+  build_latex:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: xu-cheng/latex-action@v2
+      with:
+        work_in_root_file_dir: true
+        root_file: |
+          examples/basic/main.tex
+          examples/sectionbib/main.tex
