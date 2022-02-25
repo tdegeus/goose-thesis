@@ -1,8 +1,8 @@
 % ------------------------------------------------------------------------------
 %  @LaTeX-class-file{
 %     filename        = "goose-thesis.cls",
-%     version         = "0.4.0",
-%     date            = "February 2019",
+%     version         = "0.5.0",
+%     date            = "February 2022",
 %     codetable       = "ISO/ASCII",
 %     keywords        = "LaTeX, goose-thesis",
 %     supported       = "https://github.com/tdegeus/goose-thesis",
@@ -14,53 +14,62 @@
 % ==============================================================================
 
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{goose-thesis}[2016/11/16 v0.3 customized book class]
-
-% load default article class
-\LoadClass[a4paper,fleqn,twoside]{book}
+\ProvidesClass{goose-thesis}[2022/02/25 v0.5.0 customized book class]
 
 % ==============================================================================
 % Options
 % ==============================================================================
 
-% bibliography [namecite,sectionbib]
-% ----------------------------------
+% Bibliography [namecite, twocolumnbib, sectionbib]
+% -------------------------------------------------
 
 \newif\if@namecite
 \let\if@namecite\iffalse
 \DeclareOption{namecite}{\let\if@namecite\iftrue}
 
+\newif\if@twocolumnbib
+\let\if@twocolumnbib\iffalse
+\DeclareOption{twocolumnbib}{\let\if@twocolumnbib\iftrue}
+
 \newif\if@sectionbib
 \let\if@sectionbib\iffalse
 \DeclareOption{sectionbib}{\let\if@sectionbib\iftrue}
 
-% Review: [narrow,doublespacing]
+% Layout [narrow, doublespacing]
 % ------------------------------
 
 \newif\if@narrow
 \let\if@narrow\iffalse
 \DeclareOption{narrow}{\let\if@narrow\iftrue}
 
+\newif\if@wwide
+\let\if@wwide\iffalse
+\DeclareOption{wwide}{\let\if@wwide\iftrue}
+
+\newif\if@wide
+\let\if@wide\iffalse
+\DeclareOption{wide}{\let\if@wide\iftrue}
+
 \newif\if@doublespacing
 \let\if@doublespacing\iffalse
 \DeclareOption{doublespacing}{\let\if@doublespacing\iftrue}
 
-% No header: [empty]
-% ------------------
+% Header [empty]
+% --------------
 
 \newif\if@empty
 \let\if@empty\iffalse
 \DeclareOption{empty}{\let\if@empty\iftrue}
 
-% Single-column bibliography [twocolumnbib]
-% -----------------------------------------
+% Math [fleqn]
+% ------------
 
-\newif\if@twocolumnbib
-\let\if@twocolumnbib\iffalse
-\DeclareOption{twocolumnbib}{\let\if@twocolumnbib\iftrue}
+\newif\if@fleqn
+\let\if@fleqn\iffalse
+\DeclareOption{fleqn}{\let\if@fleqn\iftrue}
 
-% Font: [times,garamond,verdana]
-% ------------------------------
+% Font [times, garamond, verdana]
+% -------------------------------
 
 \newif\if@font
 \let\if@font\iffalse
@@ -84,6 +93,17 @@
 \let\if@eqreflocal\iffalse
 \DeclareOption{eqreflocal}{\let\if@eqreflocal\iftrue}
 
+% Hyperref [showlinks, colorlinks]
+% --------------------------------
+
+\newif\if@showlinks
+\let\if@showlinks\iffalse
+\DeclareOption{showlinks}{\let\if@showlinks\iftrue}
+
+\newif\if@colorlinks
+\let\if@colorlinks\iffalse
+\DeclareOption{colorlinks}{\let\if@colorlinks\iftrue}
+
 % Process options
 % ---------------
 
@@ -93,22 +113,45 @@
 % Packages
 % ==============================================================================
 
-\RequirePackage[left=25mm,right=25mm,top=30mm,bottom=30mm]{geometry}
+\if@fleqn
+    \LoadClass[a4paper, fleqn, twoside]{book}
+\else
+    \LoadClass[a4paper, twoside]{book}
+\fi
+
 \if@narrow
-    \newgeometry{left=40mm,right=40mm,top=30mm,bottom=30mm}
+    \RequirePackage[left=40mm, right=40mm, top=30mm, bottom=30mm]{geometry}
+\else
+    \if@wwide
+        \RequirePackage[left=10mm, right=10mm, top=20mm, bottom=20mm]{geometry}
+    \else
+        \if@wide
+            \RequirePackage[left=15mm, right=15mm, top=20mm, bottom=20mm]{geometry}
+        \else
+            \RequirePackage[left=25mm, right=25mm, top=30mm, bottom=30mm]{geometry}
+        \fi
+    \fi
 \fi
 
 \RequirePackage{fix-cm}
 \RequirePackage{graphicx}
-\RequirePackage[labelformat=simple]{subcaption}
-\RequirePackage{amssymb,amsfonts,bm}
+\RequirePackage{subfig}
+\RequirePackage{amssymb}
+\RequirePackage{amsfonts}
+\RequirePackage{bm}
 \RequirePackage{enumerate}
-\RequirePackage[fleqn]{amsmath}
+\if@fleqn
+    \RequirePackage[fleqn]{amsmath}
+\else
+    \RequirePackage{amsmath}
+\fi
 \RequirePackage[font={small},labelfont=bf,labelsep=period]{caption}
 \RequirePackage[bf]{titlesec}
 \RequirePackage[dvipsnames]{xcolor}
 \RequirePackage{etoolbox}
+\RequirePackage{ragged2e}
 \RequirePackage{hyperref}
+\RequirePackage[capitalise]{cleveref}
 
 % ==============================================================================
 % Citation style
@@ -122,28 +165,26 @@
     \RequirePackage{natbib}
     \let\oldbibliography\bibliography
     \renewcommand{\bibliography}[1]{%
-        \bibliographystyle{apalike}
         \setlength{\bibsep}{3pt plus 0.3ex}
         \def\bibfont{\scriptsize}
         \renewcommand{\bibname}{References}
         \if@twocolumnbib
-            \begin{multicols}{2}\raggedright\oldbibliography{#1}\end{multicols}
+            \begin{multicols}{2}\raggedright\oldbibliography{#1}\justifying\end{multicols}
         \else
-            \raggedright\oldbibliography{#1}
+            \raggedright\oldbibliography{#1}\justifying
         \fi
     }
 \else
     \RequirePackage[square,sort&compress,numbers,comma]{natbib}
     \let\oldbibliography\bibliography
     \renewcommand{\bibliography}[1]{%
-        \bibliographystyle{unsrtnat}
         \setlength{\bibsep}{3pt plus 0.3ex}
         \def\bibfont{\scriptsize}
         \renewcommand{\bibname}{References}
         \if@twocolumnbib
-            \begin{multicols}{2}\raggedright\oldbibliography{#1}\end{multicols}
+            \begin{multicols}{2}\raggedright\oldbibliography{#1}\justifying\end{multicols}
         \else
-            \raggedright\oldbibliography{#1}
+            \raggedright\oldbibliography{#1}\justifying
         \fi
     }
 \fi
@@ -221,68 +262,61 @@
 % Hyperref
 % ==============================================================================
 
-\AtBeginDocument{%
-    \hypersetup{%
-        pdftitle=\@title,
-        citecolor=Blue,
-        filecolor=black,
-        linkcolor=Blue,
-        urlcolor=Blue,
-        breaklinks,
-        hidelinks,
-        bookmarksopen=true,
-    }%
-}
+\if@showlinks
+    \AtBeginDocument{%
+        \hypersetup{%
+            pdftitle=\@title,
+            citecolor=NavyBlue,
+            filecolor=NavyBlue,
+            linkcolor=NavyBlue,
+            urlcolor=NavyBlue,
+            breaklinks,
+            bookmarksopen=true,
+        }%
+    }
+\else
+    \if@colorlinks
+        \AtBeginDocument{%
+            \hypersetup{%
+                pdftitle=\@title,
+                citecolor=NavyBlue,
+                filecolor=NavyBlue,
+                linkcolor=NavyBlue,
+                urlcolor=NavyBlue,
+                breaklinks,
+                bookmarksopen=true,
+            }%
+        }
+    \else
+        \AtBeginDocument{%
+            \hypersetup{%
+                pdftitle=\@title,
+                citecolor=NavyBlue,
+                filecolor=NavyBlue,
+                linkcolor=NavyBlue,
+                urlcolor=NavyBlue,
+                breaklinks,
+                hidelinks,
+                bookmarksopen=true,
+            }%
+        }
+    \fi
+\fi
 
 % ==============================================================================
 % Headers
 % ==============================================================================
 
-% {command}{format}{label}{sep}{before-code}{after-code}
-% - chapters
-\titleformat
-{\chapter}
-[display]
-{\bfseries\Large}
-{\hfill CHAPTER\ \thechapter}
-{0.5ex}
-{} % before-code
-[\vspace{-0.5ex}\rule{\textwidth}{0.3pt}]
-% - section
-\titleformat
-{\section}
-{\normalfont\large\bfseries}
-{\thesection}
-{1em}
-{}
-{}
-% - subsection
-\titleformat
-{\subsection}
-{\normalfont\normalsize\bfseries}
-{\thesubsection}
-{1em}
-{}
-{}
-% - paragraph
-\titleformat
-{\paragraph}
-{\normalfont\normalsize\bfseries}
-{}
-{}
-{}
-{}
+% \titleformat{command}[shape]{format}{label}{sep}{before}[after]
+\titleformat{\chapter}[display]{\bfseries\Large}{\hfill CHAPTER\ \thechapter}{0.5ex}{} % before-code[\vspace{-0.5ex}\rule{\textwidth}{0.3pt}]
+\titleformat{\section}{\normalfont\large\bfseries}{\thesection}{1em}{}{}
+\titleformat{\subsection}{\normalfont\normalsize\bfseries}{\thesubsection}{1em}{}{}
+\titleformat{\paragraph}[runin]{\normalfont\normalsize\bfseries}{}{}{}[.]
 
 % spacing {left}{top}{bottom}, of:
-% - section
-\titlespacing{\section}
-{0pt}{1eM}{0.8em}
-% - subsection
-\titlespacing{\subsection}
-{0pt}{0.8em}{0.4em}
-% - paragraph
-\titlespacing{\paragraph}
-{0pt}{0.8em}{0em}
+\titlespacing{\section}{0pt}{1eM}{0.8em}
+\titlespacing{\subsection}{0pt}{0.8em}{0.4em}
+\titlespacing{\paragraph}{0pt}{0.8em}{1em}
 
 % no paragraph indent after header
 \AtBeginDocument{%
