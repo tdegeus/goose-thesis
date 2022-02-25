@@ -3,9 +3,9 @@
 A customised book class for LaTeX.
 
 >   This library is free to use. Any additions are very much appreciated, in terms of suggested functionality, code, documentation, testimonials, word-of-mouth advertisement, .... As always, the code comes with no guarantee. None of the developers can be held responsible for possible mistakes or misuse.
->   
+>
 >   Bug reports or feature requests can be filed on GitHub.
->   
+>
 >   (c - MIT) T.W.J. de Geus (Tom) | tom@geus.me | www.geus.me | [github.com/tdegeus/goose-thesis](http://github.com/tdegeus/goose-thesis)
 
 ## Contents
@@ -22,7 +22,7 @@ A customised book class for LaTeX.
 
 ## Usage
 
-`goose-thesis` is a customised class designed to compile a thesis from several chapters, which are usually stored as separate input files. These chapters also have some requirements on the structure, see: *[Input files](#input-files)*. To get started, copy the files from [src/](src/) to to main directory of your project (always copy [goose-article.cls](src/goose-article.cls) and copy to your need [unsrtnat.bst](src/unsrtnat.bst) or [apalike.bst](src/apalike.bst)). 
+`goose-thesis` is a customised class designed to compile a thesis from several chapters, which are usually stored as separate input files. These chapters also have some requirements on the structure, see: *[Input files](#input-files)*. To get started, copy the files from [src/](src/) to to main directory of your project (always copy [goose-article.cls](src/goose-article.cls) and copy to your need [unsrtnat.bst](src/unsrtnat.bst) or [apalike.bst](src/apalike.bst)).
 
 By default most of the standard LaTeX packages are loaded. Any of these packages can be reloaded without problems (possibly using other options). In addition, the title and the author should be specified.
 
@@ -84,7 +84,7 @@ Consequently, the main document (e.g. `main.tex`) has the following structure:
 
     Include the bibliography at the end of each chapter. If this option is used, the `\bibliography{...}` command should be removed from the main TeX-file. Instead, each of the chapters should include this command at the end of the chapter. Also, the chapters should be included using `\include{...}` instead of `\input{...}`. Compiling in this case warrants some attention. First compile the main TeX-file using `pdflatex` or `xelatex` (depending on the selected font). Then run `bibtex` on each of the chapters. Finally, recompile the main TeX-file. This corresponds to the following series of commands:
 
-    ```bash 
+    ```bash
     pdflatex -interaction=nonstopmode main.tex
     pdflatex -interaction=nonstopmode main.tex
     bibtex chapterX
@@ -97,7 +97,7 @@ Consequently, the main document (e.g. `main.tex`) has the following structure:
 
 ## Input files
 
-Each of these input files follows the same structure (e.g. `chapterX.tex`). It begins with the title of the chapter: `\chapter{...}`. The chapter name and its number are printed on the front page on this chapter. In addition, a number of fields can be included on the front page between `\begin{frontmatter} ... \end{frontmatter}`. 
+Each of these input files follows the same structure (e.g. `chapterX.tex`). It begins with the title of the chapter: `\chapter{...}`. The chapter name and its number are printed on the front page on this chapter. In addition, a number of fields can be included on the front page between `\begin{frontmatter} ... \end{frontmatter}`.
 
 ```latex
 % Title of the chapter (shown on the title page)
@@ -147,4 +147,3 @@ Note that the outputted reference list depends largely on the content of the inc
 
 * [Basic example](examples/basic/example.tex)
 * [Bibliography per chapter](examples/sectionbib/example.tex)
-

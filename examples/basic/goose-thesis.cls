@@ -344,5 +344,3 @@
 \newenvironment{remark}{\vfill\noindent\itshape\ignorespaces}{\normalfont\ignorespacesafterend}
 
 \renewenvironment{frontmatter}{\noindent\vfill\ignorespaces}{\normalfont\ignorespacesafterend\clearpage}
-
-

@@ -31,16 +31,15 @@
 \renewcommand\thechapter{\Roman{chapter}}
 
 \titleformat
-  {\chapter}
-  [display]
-  {\bfseries\Large}
-  {\hfill APPENDIX\ \thechapter}
-  {0.5ex}
-  {} % before-code
-  [\vspace{-0.5ex}\rule{\textwidth}{0.3pt}]
+{\chapter}
+[display]
+{\bfseries\Large}
+{\hfill APPENDIX\ \thechapter}
+{0.5ex}
+{} % before-code
+[\vspace{-0.5ex}\rule{\textwidth}{0.3pt}]
 
 \addcontentsline{toc}{chapter}{Appendix}
-
 
 % Another solution:
 %  https://tex.stackexchange.com/a/44971/132350
