@@ -157,10 +157,6 @@
 % Citation style
 % ==============================================================================
 
-\if@sectionbib
-    \RequirePackage{chapterbib}
-\fi
-
 \if@namecite
     \RequirePackage{natbib}
     \let\oldbibliography\bibliography
@@ -187,6 +183,10 @@
             \raggedright\oldbibliography{#1}\justifying
         \fi
     }
+\fi
+
+\if@sectionbib
+    \RequirePackage[sectionbib]{bibunits}
 \fi
 
 % define DOI command
@@ -376,7 +376,5 @@
 % ==============================================================================
 
 \newenvironment{abstract}{\section*{Abstract}\noindent\ignorespaces}{\ignorespacesafterend}
-
 \newenvironment{remark}{\vfill\noindent\itshape\ignorespaces}{\normalfont\ignorespacesafterend}
-
 \renewenvironment{frontmatter}{\noindent\vfill\ignorespaces}{\normalfont\ignorespacesafterend\clearpage}
