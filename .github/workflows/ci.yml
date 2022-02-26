@@ -10,9 +10,18 @@ jobs:
   build_latex:
     runs-on: ubuntu-latest
     steps:
-    - uses: xu-cheng/latex-action@v2
+
+    - name: Set up Git repository
+      uses: actions/checkout@v2
+
+    - name: Compile LaTeX example - basic
+      uses: dante-ev/latex-action@latest
       with:
-        work_in_root_file_dir: true
-        root_file: |
-          examples/basic/main.tex
-          examples/sectionbib/main.tex
+        working_directory: examples/basic
+        root_file: main.tex
+
+    - name: Compile LaTeX example - sectionbib
+      uses: dante-ev/latex-action@latest
+      with:
+        working_directory: examples/sectionbib
+        root_file: main.tex
