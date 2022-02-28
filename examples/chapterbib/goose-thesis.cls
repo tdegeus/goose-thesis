@@ -1,0 +1,1 @@
+../../src/goose-thesis.cls
