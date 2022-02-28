@@ -20,8 +20,14 @@ jobs:
         working_directory: examples/basic
         root_file: main.tex
 
-    - name: Compile LaTeX example - sectionbib
+    - name: Compile LaTeX example - chapterbib
       uses: dante-ev/latex-action@latest
       with:
-        working_directory: examples/sectionbib
+        working_directory: examples/chapterbib
+        root_file: main.tex
+
+    - name: Compile LaTeX example - bibunits
+      uses: dante-ev/latex-action@latest
+      with:
+        working_directory: examples/bibunits
         root_file: main.tex

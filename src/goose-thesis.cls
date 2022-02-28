@@ -23,6 +23,9 @@
 % Bibliography [namecite, twocolumnbib, sectionbib]
 % -------------------------------------------------
 
+\newif\if@mysecbib
+\let\if@mysecbib\iffalse
+
 \newif\if@namecite
 \let\if@namecite\iffalse
 \DeclareOption{namecite}{\let\if@namecite\iftrue}
@@ -31,9 +34,13 @@
 \let\if@twocolumnbib\iffalse
 \DeclareOption{twocolumnbib}{\let\if@twocolumnbib\iftrue}
 
-\newif\if@sectionbib
-\let\if@sectionbib\iffalse
-\DeclareOption{sectionbib}{\let\if@sectionbib\iftrue}
+\newif\if@chapterbib
+\let\if@chapterbib\iffalse
+\DeclareOption{chapterbib}{\let\if@chapterbib\iftrue\let\if@mysecbib\iftrue}
+
+\newif\if@bibunits
+\let\if@bibunits\iffalse
+\DeclareOption{bibunits}{\let\if@bibunits\iftrue\let\if@mysecbib\iftrue}
 
 % Layout [narrow, doublespacing]
 % ------------------------------
@@ -108,6 +115,12 @@
 % ---------------
 
 \ProcessOptions\relax
+
+\if@bibunits
+    \if@chapterbib
+        \errmessage{Choose chapterbib or bibunits}
+    \fi
+\fi
 
 % ==============================================================================
 % Packages
@@ -185,7 +198,11 @@
     }
 \fi
 
-\if@sectionbib
+\if@chapterbib
+    \RequirePackage{chapterbib}
+\fi
+
+\if@bibunits
     \RequirePackage[sectionbib]{bibunits}
 \fi
 
@@ -195,7 +212,7 @@
 
 % change to section instead of chapter
 % \begin{noindent}
-\if@sectionbib
+\if@mysecbib
     \AtBeginDocument{%
         \makeatletter
         \renewcommand\bibsection{%
