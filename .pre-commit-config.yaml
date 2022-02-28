@@ -16,7 +16,3 @@ repos:
   hooks:
   - id: latexindent-conda
     args: [-s, -w, -l, -m, -r]
-- repo: https://github.com/tdegeus/GooseBib
-  rev: v0.4.0
-  hooks:
-  - id: GbibClean

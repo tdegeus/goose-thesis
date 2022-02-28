@@ -1,12 +1,20 @@
+[![ci](https://github.com/tdegeus/goose-thesis/workflows/CI/badge.svg)](https://github.com/tdegeus/goose-thesis/actions)
+[![pre-commit](https://github.com/tdegeus/goose-thesis/workflows/pre-commit/badge.svg)](https://github.com/tdegeus/goose-thesis/actions)
+
 # goose-thesis
 
 A customised book class for LaTeX.
 
->   This library is free to use. Any additions are very much appreciated, in terms of suggested functionality, code, documentation, testimonials, word-of-mouth advertisement, .... As always, the code comes with no guarantee. None of the developers can be held responsible for possible mistakes or misuse.
+>   This library is free to use.
+>   Any additions are very much appreciated, in terms of suggested functionality, code,
+>   documentation, testimonials, word-of-mouth advertisement, ....
+>   As always, the code comes with no guarantee.
+>   None of the developers can be held responsible for possible mistakes or misuse.
 >
 >   Bug reports or feature requests can be filed on GitHub.
 >
->   (c - MIT) T.W.J. de Geus (Tom) | tom@geus.me | www.geus.me | [github.com/tdegeus/goose-thesis](http://github.com/tdegeus/goose-thesis)
+>   (c - MIT) T.W.J. de Geus (Tom) | tom@geus.me | www.geus.me |
+>   [github.com/tdegeus/goose-thesis](http://github.com/tdegeus/goose-thesis)
 
 ## Contents
 
@@ -22,9 +30,16 @@ A customised book class for LaTeX.
 
 ## Usage
 
-`goose-thesis` is a customised class designed to compile a thesis from several chapters, which are usually stored as separate input files. These chapters also have some requirements on the structure, see: *[Input files](#input-files)*. To get started, copy the files from [src/](src/) to to main directory of your project (always copy [goose-article.cls](src/goose-article.cls) and copy to your need [unsrtnat.bst](src/unsrtnat.bst) or [apalike.bst](src/apalike.bst)).
+`goose-thesis` is a customised class designed to compile a thesis from several chapters,
+which are usually stored as separate input files.
+These chapters also have some requirements on the structure, see: *[Input files](#input-files)*.
+To get started, copy the files from [src/](src/) to to main directory of your project
+(always copy [goose-thesis.cls](src/goose-thesis.cls) and
+copy to your need [unsrtnat.bst](src/unsrtnat.bst) or [apalike.bst](src/apalike.bst)).
 
-By default most of the standard LaTeX packages are loaded. Any of these packages can be reloaded without problems (possibly using other options). In addition, the title and the author should be specified.
+By default, most of the standard LaTeX packages are loaded.
+Any of these packages can be reloaded without problems (possibly using other options).
+In addition, the title and the author should be specified.
 
 Consequently, the main document (e.g. `main.tex`) has the following structure:
 
@@ -53,51 +68,95 @@ Consequently, the main document (e.g. `main.tex`) has the following structure:
 \cleardoublepage
 \input{chapterY.tex}
 
+\bibliographystyle{unsrtnat}
 \bibliography{...}
 
 \end{document}
+```
+
+Compile can be done as usual but (strictly) on the main file:
+```bash
+latexmk main.tex
 ```
 
 ## Options
 
 *   `garamond`, `times`, `verdana`
 
-    Choose a font. The default computer-modern font is used if no font is specified. If you select one of these fonts, switch in compilation from using `pdflatex` to `xelatex`. XeLaTeX is similar to `pdflatex` but it allows for the usage of TrueType-fonts.
+    Choose a font.
+    The default computer-modern font is used if no font is specified.
+    If you select one of these fonts, switch in compilation from using `pdflatex` to `xelatex`.
 
-*   `narrow`
+*   `narrow`, `wide`, `wwide`
 
-    Widen the margins of the page, useful during the review process.
+    Change the page margins (from largest to smallest margins: `narrow`, (normal), `wide`, `wwide`).
 
 *   `doublespacing`
 
     Set the line spacing to double, useful during the review process.
 
+*   `fleqn`
+
+    Use left-aligned (in stead of centered) equations.
+
+*   `empty`
+
+    Do not use any header (does not even show the page number).
+
+*   `twocolumnbib`
+
+    Use a two-column bibliography.
+
 *   `namecite`
 
-    Use names instead of numbers to cite to references.
+    Use name-citations instead of numbers.
+    Often combined with `\bibliographystyle{apalike}` (see below).
 
 *   `eqreflocal`
 
     Number the equations without a chapter number, but still starting from one in each chapter.
 
-*   `sectionbib`
+*   `chapterbib`
 
-    Include the bibliography at the end of each chapter. If this option is used, the `\bibliography{...}` command should be removed from the main TeX-file. Instead, each of the chapters should include this command at the end of the chapter. Also, the chapters should be included using `\include{...}` instead of `\input{...}`. Compiling in this case warrants some attention. First compile the main TeX-file using `pdflatex` or `xelatex` (depending on the selected font). Then run `bibtex` on each of the chapters. Finally, recompile the main TeX-file. This corresponds to the following series of commands:
+    Include the bibliography at the end of each chapter.
+    If this option is used, the `\bibliographystyle{...}` and `\bibliography{...}` should
+    not appear in the main TeX-file.
+    Instead, each of the chapters should include these command at the end of the chapter.
+    Also, the chapters should be included using `\include{...}` instead of `\input{...}`.
+    See also the [chapterbib example](examples/chapterbib/).
 
-    ```bash
-    pdflatex -interaction=nonstopmode main.tex
-    pdflatex -interaction=nonstopmode main.tex
-    bibtex chapterX
-    bibtex chapterY
-    pdflatex -interaction=nonstopmode main.tex
-    pdflatex -interaction=nonstopmode main.tex
+*   `bibunits`
+
+    Similar to the `chapterbib` option, but with the benefit that
+    `\bibliographystyle{...}` and `\bibliography{...}` can be defined globally.
+    In this case the main document with be
+    ```latex
+    \documentclass[bibunits]{goose-thesis}
+    \defaultbibliographystyle{...}
+    \defaultbibliography{...}
+
+    \begin{document}
+    ...
+    \end{document}
     ```
+    while in the chapters you just have to put `\putbib` where you want the bibliography.
+    See also the [bibunits example](examples/bibunits/).
 
-    (See also the [sectionbib example](examples/sectionbib/). The example includes a [Makefile](examples/sectionbib/Makefile) to compile straightforwardly. If the concept of Makefiles is new to you, search online, taking you for example [here](https://www.cs.swarthmore.edu/~newhall/unixhelp/howto_makefiles.html).)
+*   `showlinks`
+
+    Highlight links in the displayed (i.e. not the printed one) PDF.
+
+*   `colorlinks`
+
+    Show links using a blue color.
 
 ## Input files
 
-Each of these input files follows the same structure (e.g. `chapterX.tex`). It begins with the title of the chapter: `\chapter{...}`. The chapter name and its number are printed on the front page on this chapter. In addition, a number of fields can be included on the front page between `\begin{frontmatter} ... \end{frontmatter}`.
+Each of these input files follows the same structure (e.g. `chapterX.tex`).
+It begins with the title of the chapter: `\chapter{...}`.
+The chapter name and its number are printed on the front page on this chapter.
+In addition, a number of fields can be included on the front page between
+`\begin{frontmatter} ... \end{frontmatter}`.
 
 ```latex
 % Title of the chapter (shown on the title page)
@@ -125,7 +184,8 @@ Each of these input files follows the same structure (e.g. `chapterX.tex`). It b
 ...
 ```
 
-The following fields can be included on the front page between `\begin{frontmatter} ... \end{frontmatter}`:
+The following fields can be included on the front page between
+`\begin{frontmatter} ... \end{frontmatter}`:
 
 *   `\begin{abstract} ... \end{abstract}`
 
@@ -133,15 +193,25 @@ The following fields can be included on the front page between `\begin{frontmatt
 
 *   `\begin{remarks} ... \end{remarks}`
 
-    Any remarks to the chapter, for example a reference from which the chapter is reproduced, or the author(s) of the chapter.
+    Any remarks to the chapter, for example a reference from which the chapter is reproduced,
+    or the author(s) of the chapter.
 
 ## Citations
 
-Citations and references are handled using [natbib](http://ctan.org/pkg/natbib). In this class, the `unsrtnat` layout is used. Thereby, the extended `unsrtnat.bst` is available that includes output for the `arxivid` field. The `goose-article` class creates commands to convert the `doi` and `arxivid` fields to links (to `doi.org` and `arxiv.org` respectively). Similarly a customised `apalike` style is available.
+Citations and references are handled using [natbib](http://ctan.org/pkg/natbib).
+In this class, the `unsrtnat` layout is used.
+Thereby, the extended `unsrtnat.bst` is available that includes output for the `arxivid` field.
+The `goose-thesis` class creates commands to convert the `doi` and `arxivid` fields to links
+(to `doi.org` and `arxiv.org` respectively).
+Similarly a customised `apalike` style is available.
 
-Following standard natbib, one can use `\cite{...}` or `\citep{...}` for normal citations and `\citet{...}` to include the name. [See also this cheat-sheet](http://merkel.texture.rocks/Latex/natbib.php).
+Following standard natbib, one can use `\cite{...}` or `\citep{...}` for normal citations
+and `\citet{...}` to include the name.
+[See also this cheat-sheet](http://merkel.texture.rocks/Latex/natbib.php).
 
-Note that the outputted reference list depends largely on the content of the included `bib`-file. A simple command-line tool, [GooseBib](https://github.com/tdegeus/GooseBib), is available to clean up arbitrary `bib`-files.
+Note that the outputted reference list depends largely on the content of the included `bib`-file.
+A simple command-line tool, [GooseBib](https://github.com/tdegeus/GooseBib),
+is available to clean up arbitrary `bib`-files.
 
 ## Examples
 
