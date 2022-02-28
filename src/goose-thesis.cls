@@ -20,8 +20,8 @@
 % Options
 % ==============================================================================
 
-% Bibliography [namecite, twocolumnbib, sectionbib]
-% -------------------------------------------------
+% Bibliography [namecite, twocolumnbib, chapterbib, bibunits]
+% -----------------------------------------------------------
 
 \newif\if@mysecbib
 \let\if@mysecbib\iffalse
@@ -223,9 +223,6 @@
         }%
         \makeatother
     }
-\else
-    \apptocmd{\thebibliography}%
-    {\csname phantomsection\endcsname\addcontentsline{toc}{chapter}{\bibname}}{}{}
 \fi
 % \end{noindent}
 
