@@ -194,16 +194,21 @@
 \newcommand*{\arxivid}[1]{\sloppy\href{http://arxiv.org/abs/#1}{arXiv:~#1}}
 
 % change to section instead of chapter
-\if@namecite
+% \begin{noindent}
+\if@sectionbib
     \AtBeginDocument{%
         \makeatletter
         \renewcommand\bibsection{%
-
-            \section*{{\normalfont\large\bfseries\bibname}\@mkboth{\MakeUppercase{\bibname}}{\MakeUppercase{\bibname}}}%
+            \section{{\normalfont\large\bfseries\bibname}%
+                \@mkboth{\MakeUppercase{\bibname}}{\MakeUppercase{\bibname}}}%
         }%
         \makeatother
     }
+\else
+    \apptocmd{\thebibliography}%
+    {\csname phantomsection\endcsname\addcontentsline{toc}{chapter}{\bibname}}{}{}
 \fi
+% \end{noindent}
 
 % ==============================================================================
 % Font
@@ -307,11 +312,15 @@
 % Headers
 % ==============================================================================
 
+% \begin{noindent}
 % \titleformat{command}[shape]{format}{label}{sep}{before}[after]
-\titleformat{\chapter}[display]{\bfseries\Large}{\hfill CHAPTER\ \thechapter}{0.5ex}{} % before-code[\vspace{-0.5ex}\rule{\textwidth}{0.3pt}]
+\titleformat{\chapter}[display]{\bfseries\Large}{\hfill CHAPTER\ \thechapter}{0.5ex}{}%
+[\vspace{-0.5ex}\rule{\textwidth}{0.3pt}]
+
 \titleformat{\section}{\normalfont\large\bfseries}{\thesection}{1em}{}{}
 \titleformat{\subsection}{\normalfont\normalsize\bfseries}{\thesubsection}{1em}{}{}
 \titleformat{\paragraph}[runin]{\normalfont\normalsize\bfseries}{}{}{}[.]
+% \end{noindent}
 
 % spacing {left}{top}{bottom}, of:
 \titlespacing{\section}{0pt}{1eM}{0.8em}
@@ -344,12 +353,15 @@
 
 % appendix: per chapter
 
-\pretocmd{\chapter}{\renewcommand\thesection{\thechapter.
-        \arabic{section}}}{}{}
+% \begin{noindent}
+\pretocmd{\chapter}{\renewcommand\thesection{\thechapter.\arabic{section}}}{}{}
+% \end{noindent}
 
+% \begin{noindent}
 \newcommand\appsection{%
     \setcounter{section}{0}%
     \renewcommand\thesection{\thechapter.\Alph{section}}}
+% \end{noindent}
 
 \renewcommand{\appendix}{\appsection}
 
@@ -375,6 +387,14 @@
 % Abstract and reference information
 % ==============================================================================
 
-\newenvironment{abstract}{\section*{Abstract}\noindent\ignorespaces}{\ignorespacesafterend}
-\newenvironment{remark}{\vfill\noindent\itshape\ignorespaces}{\normalfont\ignorespacesafterend}
-\renewenvironment{frontmatter}{\noindent\vfill\ignorespaces}{\normalfont\ignorespacesafterend\clearpage}
+\newenvironment{abstract}%
+{\section*{Abstract}\noindent\ignorespaces}%
+{\ignorespacesafterend}
+
+\newenvironment{remark}%
+{\vfill\noindent\itshape\ignorespaces}%
+{\normalfont\ignorespacesafterend}
+
+\renewenvironment{frontmatter}%
+{\noindent\vfill\ignorespaces}%
+{\normalfont\ignorespacesafterend\clearpage}
