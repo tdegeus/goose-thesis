@@ -1,0 +1,30 @@
+\documentclass[twocolumnbib]{goose-thesis}
+
+\usepackage{lipsum}
+
+\title{PhD-thesis}
+
+\author{Tom de Geus}
+
+% -------------------------------
+
+\begin{document}
+
+\maketitle
+
+\setcounter{tocdepth}{0}
+\tableofcontents
+
+\cleardoublepage
+\input{chapter_1}
+
+\cleardoublepage
+\input{chapter_2}
+
+\cleardoublepage
+\renewcommand{\bibsection}{}
+\chapter*{References}
+\bibliographystyle{unsrtnat}
+\bibliography{refs}
+
+\end{document}

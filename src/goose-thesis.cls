@@ -163,12 +163,14 @@
 \RequirePackage[dvipsnames]{xcolor}
 \RequirePackage{etoolbox}
 \RequirePackage{ragged2e}
+\RequirePackage{multicol}
 \RequirePackage{hyperref}
 \RequirePackage[capitalise]{cleveref}
 
 % ==============================================================================
 % Citation style
 % ==============================================================================
+
 
 \if@namecite
     \RequirePackage{natbib}

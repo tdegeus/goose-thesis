@@ -20,6 +20,12 @@ jobs:
         working_directory: examples/basic
         root_file: main.tex
 
+    - name: Compile LaTeX example - twocolumnbib
+      uses: dante-ev/latex-action@latest
+      with:
+        working_directory: examples/twocolumnbib
+        root_file: main.tex
+
     - name: Compile LaTeX example - chapterbib
       uses: dante-ev/latex-action@latest
       with:
