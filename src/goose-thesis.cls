@@ -1,7 +1,7 @@
 % ------------------------------------------------------------------------------
 %  @LaTeX-class-file{
 %     filename        = "goose-thesis.cls",
-%     version         = "0.5.0",
+%     version         = "0.1.0",
 %     date            = "February 2022",
 %     codetable       = "ISO/ASCII",
 %     keywords        = "LaTeX, goose-thesis",
@@ -174,30 +174,8 @@
 
 \if@namecite
     \RequirePackage{natbib}
-    \let\oldbibliography\bibliography
-    \renewcommand{\bibliography}[1]{%
-        \setlength{\bibsep}{3pt plus 0.3ex}
-        \def\bibfont{\scriptsize}
-        \renewcommand{\bibname}{References}
-        \if@twocolumnbib
-            \begin{multicols}{2}\raggedright\oldbibliography{#1}\justifying\end{multicols}
-        \else
-            \raggedright\oldbibliography{#1}\justifying
-        \fi
-    }
 \else
     \RequirePackage[square,sort&compress,numbers,comma]{natbib}
-    \let\oldbibliography\bibliography
-    \renewcommand{\bibliography}[1]{%
-        \setlength{\bibsep}{3pt plus 0.3ex}
-        \def\bibfont{\scriptsize}
-        \renewcommand{\bibname}{References}
-        \if@twocolumnbib
-            \begin{multicols}{2}\raggedright\oldbibliography{#1}\justifying\end{multicols}
-        \else
-            \raggedright\oldbibliography{#1}\justifying
-        \fi
-    }
 \fi
 
 \if@chapterbib
@@ -208,6 +186,26 @@
     \RequirePackage[sectionbib]{bibunits}
 \fi
 
+\let\oldbibliography\bibliography
+\renewcommand{\bibliography}[1]{%
+    \setlength{\bibsep}{3pt plus 0.3ex}
+    \def\bibfont{\scriptsize}
+    \renewcommand{\bibname}{References}
+    \if@twocolumnbib
+        \begin{multicols}{2}
+        [
+            \bibsection%
+        ]
+        \let\oldbibsection\bibsection%
+        \renewcommand{\bibsection}{}%
+        \raggedright\oldbibliography{#1}\justifying%
+        \let\bibsection\oldbibsection%
+        \end{multicols}
+    \else
+        \raggedright\oldbibliography{#1}\justifying
+    \fi
+}
+
 % define DOI command
 \newcommand*{\doi}[1]{\sloppy\href{http://dx.doi.org/#1}{doi:~#1}}
 \newcommand*{\arxivid}[1]{\sloppy\href{http://arxiv.org/abs/#1}{arXiv:~#1}}
@@ -216,12 +214,9 @@
 % \begin{noindent}
 \if@mysecbib
     \AtBeginDocument{%
-        \makeatletter
-        \renewcommand\bibsection{%
-            \section{{\normalfont\large\bfseries\bibname}%
-                \@mkboth{\MakeUppercase{\bibname}}{\MakeUppercase{\bibname}}}%
-        }%
-        \makeatother
+        \makeatletter%
+        \renewcommand\bibsection{\section{\bibname}}%
+        \makeatother%
     }
 \fi
 % \end{noindent}

@@ -74,7 +74,7 @@ Consequently, the main document (e.g. `main.tex`) has the following structure:
 \end{document}
 ```
 
-Compile can be done as usual but (strictly) on the main file:
+Compile as usual, but (strictly) on the main file, for example:
 ```bash
 latexmk main.tex
 ```
@@ -97,7 +97,7 @@ latexmk main.tex
 
 *   `fleqn`
 
-    Use left-aligned (in stead of centered) equations.
+    Use left-aligned (instead of centered) equations.
 
 *   `empty`
 
@@ -109,7 +109,7 @@ latexmk main.tex
 
 *   `namecite`
 
-    Use name-citations instead of numbers.
+    Use name citations instead of numbers.
     Often combined with `\bibliographystyle{apalike}` (see below).
 
 *   `eqreflocal`
@@ -120,8 +120,8 @@ latexmk main.tex
 
     Include the bibliography at the end of each chapter.
     If this option is used, the `\bibliographystyle{...}` and `\bibliography{...}` should
-    not appear in the main TeX-file.
-    Instead, each of the chapters should include these command at the end of the chapter.
+    not appear in the main TeX file.
+    Instead, each of the chapters should include these commands at the end of the chapter.
     Also, the chapters should be included using `\include{...}` instead of `\input{...}`.
     See also the [chapterbib example](examples/chapterbib/).
 
@@ -139,7 +139,7 @@ latexmk main.tex
     ...
     \end{document}
     ```
-    while in the chapters you just have to put `\putbib` where you want the bibliography.
+    whereas in the chapters, you just have to put `\putbib` where you want the bibliography.
     See also the [bibunits example](examples/bibunits/).
 
 *   `showlinks`
@@ -207,7 +207,7 @@ Similarly a customised `apalike` style is available.
 
 Following standard natbib, one can use `\cite{...}` or `\citep{...}` for normal citations
 and `\citet{...}` to include the name.
-[See also this cheat-sheet](http://merkel.texture.rocks/Latex/natbib.php).
+[See also this cheat sheet](http://merkel.texture.rocks/Latex/natbib.php).
 
 Note that the outputted reference list depends largely on the content of the included `bib`-file.
 A simple command-line tool, [GooseBib](https://github.com/tdegeus/GooseBib),
