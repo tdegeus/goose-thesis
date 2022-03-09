@@ -114,6 +114,8 @@
 % Process options
 % ---------------
 
+\DeclareOption*{\PassOptionsToClass{\CurrentOption}{book}}
+
 \ProcessOptions\relax
 
 \if@bibunits

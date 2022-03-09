@@ -150,6 +150,8 @@ latexmk main.tex
 
     Show links using a blue color.
 
+*   Other book options. For example `12pt`.
+
 ## Input files
 
 Each of these input files follows the same structure (e.g. `chapterX.tex`).
