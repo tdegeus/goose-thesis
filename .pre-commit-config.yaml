@@ -1,6 +1,6 @@
 repos:
 - repo: https://github.com/macisamuele/language-formatters-pre-commit-hooks
-  rev: v2.2.0
+  rev: v2.3.0
   hooks:
   - id: pretty-format-yaml
     args: [--autofix, --indent, '2']
@@ -12,7 +12,7 @@ repos:
   - id: check-yaml
   - id: debug-statements
 - repo: https://github.com/cmhughes/latexindent.pl
-  rev: V3.15
+  rev: V3.17.1
   hooks:
-  - id: latexindent-conda
-    args: [-s, -w, -l, -m, -r]
+  - id: latexindent
+    args: [-s, -wd, -l, -m, -r]

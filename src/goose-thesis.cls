@@ -1,8 +1,8 @@
 % ------------------------------------------------------------------------------
 %  @LaTeX-class-file{
 %     filename        = "goose-thesis.cls",
-%     version         = "0.1.0",
-%     date            = "February 2022",
+%     version         = "0.6.0",
+%     date            = "April 2022",
 %     codetable       = "ISO/ASCII",
 %     keywords        = "LaTeX, goose-thesis",
 %     supported       = "https://github.com/tdegeus/goose-thesis",
@@ -14,7 +14,7 @@
 % ==============================================================================
 
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{goose-thesis}[2022/02/25 v0.5.0 customized book class]
+\ProvidesClass{goose-thesis}[2022/04/26 v0.6.0 customized book class]
 
 % ==============================================================================
 % Options
