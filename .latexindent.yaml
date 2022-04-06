@@ -6,11 +6,12 @@ lookForAlignDelims:
   align: 0
 
 modifyLineBreaks:
-  textWrapOptions:
-    columns: 100
   oneSentencePerLine:
     manipulateSentences: 1
     removeSentenceLineBreaks: 0
+    textWrapSentences: 1
+  textWrapOptions:
+    columns: 100
 
 fineTuning:
   namedGroupingBracesBrackets:
